@@ -1,12 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, ScrollView, Text} from 'react-native';
-import {introScreenStyles, scaleVertical} from '../../assets/style';
+import {introScreenStyles, scaleVertical, scale} from '../../assets/style';
 import LogoSvg from '../../assets/svgs/LogoSvg';
 import IntroSvg from '../../assets/svgs/IntroSvg';
 import Button from '../../components/Button';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export default function Inttro() {
+export default function Intro(props) {
   return (
     <ScrollView
       style={{
@@ -24,10 +25,17 @@ export default function Inttro() {
       bounces={false}>
       <View
         style={{
+          flex: 1,
           alignItems: 'center',
         }}>
         <LogoSvg size={1.5} />
-        <IntroSvg />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+          }}>
+          <IntroSvg />
+        </View>
       </View>
       <View>
         <View
@@ -46,9 +54,27 @@ export default function Inttro() {
         </View>
         <View
           style={{
-            paddingTop: scaleVertical(10),
+            paddingVertical: scaleVertical(10),
+            alignItems: 'center',
           }}>
-          <Text>Already have an account? Log in</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <Text style={introScreenStyles.noAccountText}>
+              Already have an account?{' '}
+            </Text>
+            <TouchableOpacity
+              style={{
+                paddingVertical: scale(5),
+              }}
+              onPress={() => {
+                props.navigation.navigate('Login');
+              }}>
+              <Text style={introScreenStyles.link}>Log in</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ScrollView>

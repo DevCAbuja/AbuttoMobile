@@ -67,10 +67,12 @@ export const buttonStyles = {
   darkButtonText: {
     color: colors.abuttoFairest,
     fontSize: scale(fonts.h5.fontSize),
+    fontFamily: fonts.semiBoldText.fontFamily,
   },
   lightButtonText: {
     color: colors.abuttoBlue,
     fontSize: scale(fonts.h5.fontSize),
+    fontFamily: fonts.semiBoldText.fontFamily,
   },
 };
 
@@ -80,5 +82,15 @@ export const introScreenStyles = {
     flex: 1,
     padding: scale(20),
     backgroundColor: colors.abuttoLight,
+  },
+  noAccountText: {
+    fontFamily: fonts.regularText.fontFamily,
+    fontSize: scale(fonts.h5.fontSize),
+    color: colors.abuttoDark,
+  },
+  link: {
+    fontFamily: fonts.semiBoldText.fontFamily,
+    fontSize: scale(fonts.h5.fontSize),
+    color: colors.abuttoBlue,
   },
 };
