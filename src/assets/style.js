@@ -35,6 +35,8 @@ export const colors = {
   abuttoFairest: '#EDF3FB',
   abuttoBlue: '#3750B2',
   abuttoDark: '#000000',
+  abuttoError: '#E13737',
+  abuttoGrey: '#B6B6B6',
 };
 
 // General App Styles
@@ -64,17 +66,30 @@ export const buttonStyles = {
     paddingHorizontal: scale(20),
     marginVertical: scaleVertical(5),
   },
+  submitButton: {
+    borderWidth: scale(1),
+    borderColor: colors.abuttoBlue,
+    backgroundColor: colors.abuttoBlue,
+    borderRadius: scale(5),
+    paddingVertical: scale(10),
+    paddingHorizontal: scale(20),
+    marginVertical: scaleVertical(5),
+  },
   darkButtonText: {
     color: colors.abuttoFairest,
     fontSize: scale(fonts.h5.fontSize),
     fontFamily: fonts.semiBoldText.fontFamily,
+    textAlign: 'center',
   },
   lightButtonText: {
     color: colors.abuttoBlue,
     fontSize: scale(fonts.h5.fontSize),
     fontFamily: fonts.semiBoldText.fontFamily,
+    textAlign: 'center',
   },
 };
+
+export const floatingInputStyle = {};
 
 // Intro screen styles
 export const introScreenStyles = {
@@ -92,5 +107,27 @@ export const introScreenStyles = {
     fontFamily: fonts.semiBoldText.fontFamily,
     fontSize: scale(fonts.h5.fontSize),
     color: colors.abuttoBlue,
+  },
+};
+
+// Login screen
+export const loginScreenStyles = {
+  container: {
+    flex: 1,
+    backgroundColor: colors.abuttoLight,
+  },
+  welcomeBack: {
+    fontFamily: fonts.boldText.fontFamily,
+    fontSize: scale(fonts.h3.fontSize),
+    color: colors.abuttoBlue,
+    textAlign: 'center',
+    marginBottom: scale(10),
+  },
+  continue: {
+    fontFamily: fonts.regularText.fontFamily,
+    fontSize: scale(fonts.h5.fontSize),
+    color: colors.abuttoDark,
+    textAlign: 'center',
+    marginBottom: scale(10),
   },
 };

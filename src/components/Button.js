@@ -8,7 +8,11 @@ export default function Button({text, onPress, type}) {
     <TouchableOpacity
       onPress={onPress}
       style={
-        type === 'light' ? buttonStyles.lightButton : buttonStyles.darkButton
+        type === 'light'
+          ? buttonStyles.lightButton
+          : type === 'submit'
+          ? buttonStyles.submitButton
+          : buttonStyles.darkButton
       }>
       <Text
         style={
