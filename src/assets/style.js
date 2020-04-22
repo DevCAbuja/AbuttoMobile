@@ -130,4 +130,11 @@ export const loginScreenStyles = {
     textAlign: 'center',
     marginBottom: scale(10),
   },
+  bottomText: {
+    fontFamily: fonts.regularText.fontFamily,
+    fontSize: scale(fonts.h5.fontSize - 1),
+    color: colors.abuttoDark,
+    textAlign: 'center',
+    marginBottom: scale(10),
+  },
 };

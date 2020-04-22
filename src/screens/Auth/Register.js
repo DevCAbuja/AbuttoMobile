@@ -15,20 +15,25 @@ import {
   colors,
   introScreenStyles,
 } from '../../assets/style';
-import TriangleSvg from '../../assets/svgs/TriangleSvg';
 import LogoSvg from '../../assets/svgs/LogoSvg';
 import Button from '../../components/Button';
 import OceanSvg from '../../assets/svgs/OceanSvg';
 import {LeftChevronSVG} from '../../assets/svgs/AppSvg';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export default function Login(props) {
+export default function Register(props) {
   const usernameRef = createRef();
   const passwordRef = createRef();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [usernameError, setUsernameError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const phoneNumberRef = createRef();
+  const [state, setState] = useState({
+    username: '',
+    password: '',
+    phoneNumber: '',
+    confirmPassword: '',
+    phoneNumberError: '',
+    usernameError: '',
+    passwordError: '',
+  });
 
   const animateOcean = new Animated.Value(0);
 
@@ -51,41 +56,67 @@ export default function Login(props) {
     animateWallBar();
   }, []);
 
-  const onLogin = () => {
+  const onRegister = () => {
     let error = false;
-    if (!username) {
-      setUsernameError('Enter your username');
+    if (!state.username) {
+      setState((prevState) => ({
+        ...prevState,
+        usernameError: 'Enter your username',
+      }));
       error = true;
     }
-    if (!password) {
-      setPasswordError('Enter your password');
+    if (!state.password) {
+      setState((prevState) => ({
+        ...prevState,
+        passwordError: 'Enter a password',
+      }));
+      error = true;
+    }
+    if (!state.phoneNumber) {
+      setState((prevState) => ({
+        ...prevState,
+        phoneNumberError: 'Enter a valid phone number',
+      }));
+      error = true;
     }
     if (!error) {
       console.log('passed');
     }
   };
 
+  const handleInputChange = (text, name) => {
+    setState((prevState) => ({
+      ...prevState,
+      [name]: text,
+      phoneNumberError: '',
+      usernameError: '',
+      passwordError: '',
+    }));
+  };
+
   return (
-    <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+    <KeyboardAvoidingView
+      style={loginScreenStyles.container}
+      behavior="padding">
       <ScrollView
-        bounces={false}
         style={{
           flex: 1,
         }}
-        contentContainerStyle={loginScreenStyles.container}>
+        bounces={false}
+        showsHorizontalScrollIndicator={false}
+        stickyHeaderIndices={[0]}>
+        <TouchableOpacity
+          style={{
+            padding: scale(10),
+          }}
+          onPress={props.navigation.goBack}>
+          <LeftChevronSVG color={colors.abuttoBlue} size={2} />
+        </TouchableOpacity>
         <View
           style={{
             flex: 1,
             justifyContent: 'space-between',
           }}>
-          <View
-            style={{
-              position: 'absolute',
-              marginTop: -scale(40),
-              marginLeft: -scale(10),
-            }}>
-            <TriangleSvg />
-          </View>
           <TouchableOpacity
             style={{
               padding: scale(10),
@@ -95,18 +126,16 @@ export default function Login(props) {
           </TouchableOpacity>
           <View
             style={{
-              padding: scale(50),
+              padding: scale(20),
             }}>
-            <View
-              style={{
-                paddingTop: scaleVertical(40),
-                alignItems: 'center',
-              }}>
-              <LogoSvg />
+            <View>
               <View>
-                <Text style={loginScreenStyles.welcomeBack}>Welcome Back</Text>
-                <Text style={loginScreenStyles.continue}>
-                  Sign in to continue
+                <Text
+                  style={[loginScreenStyles.welcomeBack, {textAlign: 'left'}]}>
+                  Welcome,
+                </Text>
+                <Text style={[loginScreenStyles.continue, {textAlign: 'left'}]}>
+                  Let's get to know you
                 </Text>
               </View>
             </View>
@@ -127,17 +156,39 @@ export default function Login(props) {
                 returnKeyType="next"
                 autoCorrect={false}
                 onSubmitEditing={() => {
+                  if (phoneNumberRef && phoneNumberRef.current) {
+                    phoneNumberRef.current.focus();
+                  }
+                }}
+                value={state.username}
+                onChangeText={(text) => {
+                  handleInputChange(text, 'username');
+                }}
+                blurOnSubmit={false}
+                error={state.usernameError}
+              />
+              <FloatingLabelInput
+                ref={phoneNumberRef}
+                editable
+                maxLength={40}
+                label="Phone Number"
+                autoCapitalize="none"
+                name="phoneNumberInput"
+                keyboardType="phone-pad"
+                focusNextInput="passwordInput"
+                returnKeyType="next"
+                autoCorrect={false}
+                onSubmitEditing={() => {
                   if (passwordRef && passwordRef.current) {
                     passwordRef.current.focus();
                   }
                 }}
-                value={username}
+                value={state.phoneNumber}
                 onChangeText={(text) => {
-                  setUsername(text);
-                  setUsernameError('');
+                  handleInputChange(text, 'phoneNumber');
                 }}
                 blurOnSubmit={false}
-                error={usernameError}
+                error={state.phoneNumberError}
               />
               <FloatingLabelInput
                 ref={passwordRef}
@@ -150,23 +201,22 @@ export default function Login(props) {
                 secureTextEntry={true}
                 returnKeyType="done"
                 autoCorrect={false}
-                value={password}
+                value={state.password}
                 onChangeText={(text) => {
-                  setPassword(text);
-                  setPasswordError('');
+                  handleInputChange(text, 'password');
                 }}
                 blurOnSubmit={false}
-                error={passwordError}
+                error={state.passwordError}
               />
               <View
                 style={{
                   paddingTop: scale(30),
                 }}>
-                <Button text="Login" onPress={onLogin} type="submit" />
+                <Button text="Register" onPress={onRegister} type="submit" />
               </View>
             </View>
             <TouchableOpacity
-              onPress={() => props.navigation.navigate('Register')}>
+              onPress={() => props.navigation.navigate('Login')}>
               <View
                 style={{
                   flexDirection: 'row',
@@ -174,7 +224,7 @@ export default function Login(props) {
                   justifyContent: 'center',
                 }}>
                 <Text style={loginScreenStyles.bottomText}>
-                  Don't have an account?
+                  Already have an account?
                 </Text>
                 <Text
                   style={[
@@ -182,18 +232,18 @@ export default function Login(props) {
                     introScreenStyles.link,
                   ]}>
                   {' '}
-                  Register
+                  Login
                 </Text>
               </View>
             </TouchableOpacity>
-            <Animated.View
-              style={{
-                left: leftPosition,
-              }}>
-              <OceanSvg />
-            </Animated.View>
           </View>
         </View>
+        <Animated.View
+          style={{
+            left: leftPosition,
+          }}>
+          <OceanSvg />
+        </Animated.View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
