@@ -102,7 +102,7 @@ export default function Login(props) {
                 paddingTop: scaleVertical(40),
                 alignItems: 'center',
               }}>
-              <LogoSvg />
+              <LogoSvg size={1.7} />
               <View>
                 <Text style={loginScreenStyles.welcomeBack}>Welcome Back</Text>
                 <Text style={loginScreenStyles.continue}>
@@ -165,36 +165,32 @@ export default function Login(props) {
                 <Button text="Login" onPress={onLogin} type="submit" />
               </View>
             </View>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('Register')}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Text style={loginScreenStyles.bottomText}>
-                  Don't have an account?
-                </Text>
-                <Text
-                  style={[
-                    loginScreenStyles.bottomText,
-                    introScreenStyles.link,
-                  ]}>
-                  {' '}
-                  Register
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <Animated.View
-              style={{
-                left: leftPosition,
-              }}>
-              <OceanSvg />
-            </Animated.View>
           </View>
         </View>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Register')}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text style={loginScreenStyles.bottomText}>
+              Don't have an account?
+            </Text>
+            <Text
+              style={[loginScreenStyles.bottomText, introScreenStyles.link]}>
+              {' '}
+              Register
+            </Text>
+          </View>
+        </TouchableOpacity>
       </ScrollView>
+      <Animated.View
+        style={{
+          left: leftPosition,
+        }}>
+        <OceanSvg />
+      </Animated.View>
     </KeyboardAvoidingView>
   );
 }

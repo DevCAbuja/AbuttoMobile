@@ -215,36 +215,32 @@ export default function Register(props) {
                 <Button text="Register" onPress={onRegister} type="submit" />
               </View>
             </View>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('Login')}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Text style={loginScreenStyles.bottomText}>
-                  Already have an account?
-                </Text>
-                <Text
-                  style={[
-                    loginScreenStyles.bottomText,
-                    introScreenStyles.link,
-                  ]}>
-                  {' '}
-                  Login
-                </Text>
-              </View>
-            </TouchableOpacity>
           </View>
         </View>
-        <Animated.View
-          style={{
-            left: leftPosition,
-          }}>
-          <OceanSvg />
-        </Animated.View>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text style={loginScreenStyles.bottomText}>
+              Already have an account?
+            </Text>
+            <Text
+              style={[loginScreenStyles.bottomText, introScreenStyles.link]}>
+              {' '}
+              Login
+            </Text>
+          </View>
+        </TouchableOpacity>
       </ScrollView>
+      <Animated.View
+        style={{
+          left: leftPosition,
+        }}>
+        <OceanSvg />
+      </Animated.View>
     </KeyboardAvoidingView>
   );
 }
