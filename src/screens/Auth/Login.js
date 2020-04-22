@@ -66,13 +66,14 @@ export default function Login(props) {
   };
 
   return (
-    <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+    <KeyboardAvoidingView
+      style={loginScreenStyles.container}
+      behavior="padding">
       <ScrollView
         bounces={false}
         style={{
           flex: 1,
-        }}
-        contentContainerStyle={loginScreenStyles.container}>
+        }}>
         <View
           style={{
             flex: 1,
