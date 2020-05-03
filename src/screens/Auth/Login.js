@@ -73,12 +73,26 @@ export default function Login(props) {
         bounces={false}
         style={{
           flex: 1,
-        }}>
+        }}
+        showsVerticalScrollIndicator={false}
+        stickyHeaderIndices={[0]}>
         <View
           style={{
-            flex: 1,
-            justifyContent: 'space-between',
+            position: 'absolute',
           }}>
+          <View
+            style={{
+              zIndex: 4,
+            }}>
+            <TouchableOpacity
+              style={{
+                padding: scale(10),
+                zIndex: 5,
+              }}
+              onPress={props.navigation.goBack}>
+              <LeftChevronSVG color={colors.abuttoFairest} size={2} />
+            </TouchableOpacity>
+          </View>
           <View
             style={{
               position: 'absolute',
@@ -87,13 +101,12 @@ export default function Login(props) {
             }}>
             <TriangleSvg />
           </View>
-          <TouchableOpacity
-            style={{
-              padding: scale(10),
-            }}
-            onPress={props.navigation.goBack}>
-            <LeftChevronSVG color={colors.abuttoFairest} size={2} />
-          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            justifyContent: 'space-between',
+            backgroundColor: 'transparent',
+          }}>
           <View
             style={{
               padding: scale(50),
@@ -174,6 +187,7 @@ export default function Login(props) {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'center',
+              paddingBottom: scale(90),
             }}>
             <Text style={loginScreenStyles.bottomText}>
               Don't have an account?
@@ -189,6 +203,8 @@ export default function Login(props) {
       <Animated.View
         style={{
           left: leftPosition,
+          position: 'absolute',
+          bottom: 0,
         }}>
         <OceanSvg />
       </Animated.View>

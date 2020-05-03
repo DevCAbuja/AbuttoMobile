@@ -20,19 +20,22 @@ import Button from '../../components/Button';
 import OceanSvg from '../../assets/svgs/OceanSvg';
 import {LeftChevronSVG} from '../../assets/svgs/AppSvg';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {validateEmail} from '../../helpers';
 
 export default function Register(props) {
-  const usernameRef = createRef();
+  const fullNameRef = createRef();
   const passwordRef = createRef();
+  const emailRef = createRef();
   const phoneNumberRef = createRef();
   const [state, setState] = useState({
-    username: '',
+    fullName: '',
     password: '',
     phoneNumber: '',
-    confirmPassword: '',
-    phoneNumberError: '',
-    usernameError: '',
+    emailAddress: '',
     passwordError: '',
+    phoneNumberError: '',
+    fullNameError: '',
+    emailAddressError: '',
   });
 
   const animateOcean = new Animated.Value(0);
@@ -58,10 +61,24 @@ export default function Register(props) {
 
   const onRegister = () => {
     let error = false;
-    if (!state.username) {
+    if (!state.fullName) {
       setState((prevState) => ({
         ...prevState,
-        usernameError: 'Enter your username',
+        fullNameError: 'Enter your full name',
+      }));
+      error = true;
+    }
+    if (state.fullName && state.fullName.split(' ').length < 2) {
+      setState((prevState) => ({
+        ...prevState,
+        fullNameError: 'Please enter your first and last name',
+      }));
+      error = true;
+    }
+    if (state.emailAddress && !validateEmail(state.emailAddress)) {
+      setState((prevState) => ({
+        ...prevState,
+        emailAddressError: 'Please enter a valid email address or leave empty',
       }));
       error = true;
     }
@@ -89,7 +106,7 @@ export default function Register(props) {
       ...prevState,
       [name]: text,
       phoneNumberError: '',
-      usernameError: '',
+      fullNameError: '',
       passwordError: '',
     }));
   };
@@ -103,7 +120,7 @@ export default function Register(props) {
           flex: 1,
         }}
         bounces={false}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         stickyHeaderIndices={[0]}>
         <TouchableOpacity
           style={{
@@ -146,12 +163,34 @@ export default function Register(props) {
                 padding: scale(20),
               }}>
               <FloatingLabelInput
-                ref={usernameRef}
+                ref={fullNameRef}
                 editable
                 maxLength={40}
-                label="Username"
+                label="Full Name"
                 autoCapitalize="none"
-                name="usernameInput"
+                name="fullNameInput"
+                focusNextInput="passwordInput"
+                returnKeyType="next"
+                autoCorrect={false}
+                onSubmitEditing={() => {
+                  if (emailRef && emailRef.current) {
+                    emailRef.current.focus();
+                  }
+                }}
+                value={state.fullName}
+                onChangeText={(text) => {
+                  handleInputChange(text, 'fullName');
+                }}
+                blurOnSubmit={false}
+                error={state.fullNameError}
+              />
+              <FloatingLabelInput
+                ref={emailRef}
+                editable
+                maxLength={40}
+                label="Email Address"
+                autoCapitalize="none"
+                name="fullNameInput"
                 focusNextInput="passwordInput"
                 returnKeyType="next"
                 autoCorrect={false}
@@ -160,12 +199,12 @@ export default function Register(props) {
                     phoneNumberRef.current.focus();
                   }
                 }}
-                value={state.username}
+                value={state.emailAddress}
                 onChangeText={(text) => {
-                  handleInputChange(text, 'username');
+                  handleInputChange(text, 'emailAddress');
                 }}
                 blurOnSubmit={false}
-                error={state.usernameError}
+                error={state.emailAddressError}
               />
               <FloatingLabelInput
                 ref={phoneNumberRef}
@@ -238,6 +277,8 @@ export default function Register(props) {
       <Animated.View
         style={{
           left: leftPosition,
+          position: 'absolute',
+          bottom: 0,
         }}>
         <OceanSvg />
       </Animated.View>
