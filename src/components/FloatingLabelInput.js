@@ -59,69 +59,73 @@ const FloatingLabelInput = forwardRef((props, ref) => {
   };
   return (
     <TouchableWithoutFeedback onPress={focusInput}>
-      <View
-        style={{
-          // paddingTop: Platform.OS === 'ios' ? 18 : 0,
-          marginVertical: scale(10),
-          paddingHorizontal: scale(5),
-          paddingBottom: 0,
-          height: scale(48),
-          borderRadius: scale(5),
-          borderWidth: 2,
-          borderColor: props.error
-            ? colors.abuttoError
-            : state.isFocused
-            ? colors.abuttoBlue
-            : colors.abuttoGrey,
-        }}>
-        <Animated.Text style={labelStyle}>{label}</Animated.Text>
-        <TextInput
-          {...props}
-          ref={ref}
-          secureTextEntry={props.secureTextEntry ? secureTextInput : false}
-          enablesReturnKeyAutomatically={true}
+      <View>
+        <View
           style={{
-            // height: 26,
-            marginBottom: -scale(10),
-            // height: scale(40),
-            flex: 1,
-            fontFamily: fonts.regularText.fontFamily,
-            fontSize: scale(fonts.h5.fontSize),
-            color: colors.abuttoDark,
+            // paddingTop: Platform.OS === 'ios' ? 18 : 0,
+            marginTop: scale(10),
+            paddingHorizontal: scale(5),
             paddingBottom: 0,
-          }}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-        {icon ? (
-          props.secureTextEntry ? (
-            <TouchableOpacity
-              style={{
-                top: -25,
-                display: 'flex',
-                marginLeft: '91%',
-              }}
-              onPress={() => {
-                setState((prevState) => ({
-                  secureTextInput: !prevState.secureTextInput,
-                }));
-              }}>
-              <View>
+            height: scale(48),
+            borderRadius: scale(5),
+            borderWidth: 2,
+            borderColor: props.error
+              ? colors.abuttoError
+              : state.isFocused
+              ? colors.abuttoBlue
+              : colors.abuttoGrey,
+          }}>
+          <Animated.Text style={labelStyle}>{label}</Animated.Text>
+          <TextInput
+            {...props}
+            ref={ref}
+            secureTextEntry={props.secureTextEntry ? secureTextInput : false}
+            enablesReturnKeyAutomatically={true}
+            style={{
+              // height: 26,
+              marginBottom: -scale(10),
+              // height: scale(40),
+              flex: 1,
+              fontFamily: fonts.regularText.fontFamily,
+              fontSize: scale(fonts.h5.fontSize),
+              color: colors.abuttoDark,
+              paddingBottom: 0,
+            }}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          />
+          {icon ? (
+            props.secureTextEntry ? (
+              <TouchableOpacity
+                style={{
+                  top: -25,
+                  display: 'flex',
+                  marginLeft: '91%',
+                }}
+                onPress={() => {
+                  setState((prevState) => ({
+                    secureTextInput: !prevState.secureTextInput,
+                  }));
+                }}>
+                <View>
+                  <Image source={icon} />
+                </View>
+              </TouchableOpacity>
+            ) : (
+              <View
+                style={{
+                  top: -25,
+                  display: 'flex',
+                  marginLeft: '91%',
+                }}>
                 <Image source={icon} />
               </View>
-            </TouchableOpacity>
-          ) : (
-            <View
-              style={{
-                top: -25,
-                display: 'flex',
-                marginLeft: '91%',
-              }}>
-              <Image source={icon} />
-            </View>
-          )
-        ) : null}
-        <Text type="small" style={{color: colors.abuttoError}}>
+            )
+          ) : null}
+        </View>
+        <Text
+          type="small"
+          style={{color: colors.abuttoError, textAlign: 'right'}}>
           {props.error}
         </Text>
       </View>
