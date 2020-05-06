@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {Dimensions} from 'react-native';
+import {Dimensions, StyleSheet, Platform} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 
@@ -37,12 +37,58 @@ export const colors = {
   abuttoDark: '#000000',
   abuttoError: '#E13737',
   abuttoGrey: '#B6B6B6',
+  abuttoWhite: '#ffffff',
+};
+
+export const tabMenuStyle = {
+  label: {
+    fontSize: scale(fonts.h6.fontSize),
+    fontFamily: fonts.boldText.fontFamily,
+    textAlign: 'center',
+  },
 };
 
 // General App Styles
 export const appStyles = {
   container: {
     flex: 1,
+  },
+  card: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: colors.abuttoWhite,
+    borderRadius: scale(5),
+    margin: scale(5),
+    padding: scale(10),
+    ...Platform.select({
+      ios: {
+        shadowColor: colors.abuttoDark,
+        shadowOffset: {width: 0, height: 1},
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
+};
+
+// Sidebar Menu Styles
+export const sidebarMenuStyles = {
+  container: {
+    padding: scale(20),
+    flex: 1,
+  },
+  menuContainer: {
+    padding: scale(10),
+    flex: 1,
+    // backgroundColor: colors.abuttoFairest,
+    marginBottom: scale(5),
+  },
+  menuText: {
+    fontFamily: fonts.regularText.fontFamily,
+    fontSize: scale(fonts.h5.fontSize),
   },
 };
 
@@ -130,4 +176,68 @@ export const loginScreenStyles = {
     textAlign: 'center',
     marginBottom: scale(10),
   },
+  bottomText: {
+    fontFamily: fonts.regularText.fontFamily,
+    fontSize: scale(fonts.h5.fontSize - 1),
+    color: colors.abuttoDark,
+    textAlign: 'center',
+    marginBottom: scale(10),
+  },
 };
+
+// Home screen
+export const homeScreenStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: scale(10),
+    backgroundColor: colors.abuttoFairest,
+  },
+  searchInputContainer: {
+    marginTop: scale(15),
+    marginHorizontal: scale(20),
+    backgroundColor: colors.abuttoWhite,
+    paddingHorizontal: scale(10),
+    borderRadius: scale(5),
+    flexDirection: 'row',
+    alignItems: 'center',
+    ...Platform.select({
+      ios: {
+        shadowColor: colors.abuttoDark,
+        shadowOffset: {width: 0, height: 1},
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 2,
+      },
+    }),
+  },
+  searchInput: {
+    flex: 1,
+    marginLeft: scale(10),
+    backgroundColor: colors.abuttoWhite,
+    fontSize: scale(fonts.h4.fontSize),
+    fontFamily: fonts.regularText.fontFamily,
+  },
+  menuContainer: {
+    flex: 1,
+    paddingTop: scale(20),
+  },
+  homeMenuContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    margin: scale(10),
+  },
+  menuImage: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    paddingTop: scale(170),
+  },
+  homeMenuText: {
+    fontFamily: fonts.regularText.fontFamily,
+    fontSize: scale(fonts.h5.fontSize),
+    textAlign: 'center',
+    color: colors.abuttoBlue,
+  },
+});

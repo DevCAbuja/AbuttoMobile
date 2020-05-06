@@ -50,31 +50,37 @@ export default function Intro(props) {
             alignItems: 'center',
             paddingTop: scaleVertical(10),
           }}>
-          <Button text="email or phone" onPress={() => {}} type="light" />
+          <Button
+            text="email or phone"
+            onPress={() => {
+              props.navigation.navigate('Register');
+            }}
+            type="light"
+          />
         </View>
         <View
           style={{
             paddingVertical: scaleVertical(10),
             alignItems: 'center',
           }}>
-          <View
+          <TouchableOpacity
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
+              paddingVertical: scale(5),
+            }}
+            onPress={() => {
+              props.navigation.navigate('Login');
             }}>
-            <Text style={introScreenStyles.noAccountText}>
-              Already have an account?{' '}
-            </Text>
-            <TouchableOpacity
+            <View
               style={{
-                paddingVertical: scale(5),
-              }}
-              onPress={() => {
-                props.navigation.navigate('Login');
+                flexDirection: 'row',
+                alignItems: 'center',
               }}>
+              <Text style={introScreenStyles.noAccountText}>
+                Already have an account?{' '}
+              </Text>
               <Text style={introScreenStyles.link}>Log in</Text>
-            </TouchableOpacity>
-          </View>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
