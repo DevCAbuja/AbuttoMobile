@@ -30,7 +30,6 @@ const drawerItems = [
 ];
 
 export default function CustomDrawerContent(props) {
-  console.log(props);
   return (
     <View style={sidebarMenuStyles.container}>
       <FlatList
