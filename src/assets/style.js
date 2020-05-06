@@ -237,5 +237,6 @@ export const homeScreenStyles = StyleSheet.create({
     fontFamily: fonts.regularText.fontFamily,
     fontSize: scale(fonts.h5.fontSize),
     textAlign: 'center',
+    color: colors.abuttoBlue,
   },
 });
