@@ -277,8 +277,8 @@ export default function Register(props) {
       <Animated.View
         style={{
           left: leftPosition,
-          position: 'absolute',
-          bottom: 0,
+          // position: 'absolute',
+          // bottom: 0,
         }}>
         <OceanSvg />
       </Animated.View>

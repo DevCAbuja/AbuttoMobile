@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {createRef, useState, useEffect} from 'react';
+import React, {createRef, useState, useEffect, useContext} from 'react';
 import {
   ScrollView,
   View,
@@ -21,8 +21,10 @@ import Button from '../../components/Button';
 import OceanSvg from '../../assets/svgs/OceanSvg';
 import {LeftChevronSVG} from '../../assets/svgs/AppSvg';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import AppContext from '../../../AppContext';
 
 export default function Login(props) {
+  const {dispatch} = useContext(AppContext);
   const usernameRef = createRef();
   const passwordRef = createRef();
   const [username, setUsername] = useState('');
@@ -63,12 +65,13 @@ export default function Login(props) {
     if (!error) {
       console.log('passed');
     }
+    dispatch({
+      isLoggedIn: true,
+    });
   };
 
   return (
-    <KeyboardAvoidingView
-      style={loginScreenStyles.container}
-      behavior="padding">
+    <KeyboardAvoidingView style={loginScreenStyles.container} behavior="height">
       <ScrollView
         bounces={false}
         style={{
@@ -82,12 +85,11 @@ export default function Login(props) {
           }}>
           <View
             style={{
-              zIndex: 4,
+              zIndex: 2,
             }}>
             <TouchableOpacity
               style={{
                 padding: scale(10),
-                zIndex: 5,
               }}
               onPress={props.navigation.goBack}>
               <LeftChevronSVG color={colors.abuttoFairest} size={2} />
@@ -106,14 +108,15 @@ export default function Login(props) {
           style={{
             justifyContent: 'space-between',
             backgroundColor: 'transparent',
+            zIndex: 999,
           }}>
           <View
             style={{
-              padding: scale(50),
+              padding: scale(20),
             }}>
             <View
               style={{
-                paddingTop: scaleVertical(40),
+                paddingTop: scaleVertical(10),
                 alignItems: 'center',
               }}>
               <LogoSvg size={1.7} />
@@ -128,7 +131,8 @@ export default function Login(props) {
           <View>
             <View
               style={{
-                padding: scale(20),
+                paddingHorizontal: scale(20),
+                paddingVertical: scale(10),
               }}>
               <FloatingLabelInput
                 ref={usernameRef}
@@ -187,7 +191,6 @@ export default function Login(props) {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'center',
-              paddingBottom: scale(90),
             }}>
             <Text style={loginScreenStyles.bottomText}>
               Don't have an account?
@@ -203,8 +206,8 @@ export default function Login(props) {
       <Animated.View
         style={{
           left: leftPosition,
-          position: 'absolute',
-          bottom: 0,
+          // position: 'absolute',
+          // bottom: 0,
         }}>
         <OceanSvg />
       </Animated.View>
