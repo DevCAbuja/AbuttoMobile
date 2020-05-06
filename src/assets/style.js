@@ -196,7 +196,7 @@ export const homeScreenStyles = StyleSheet.create({
     marginTop: scale(15),
     marginHorizontal: scale(20),
     backgroundColor: colors.abuttoWhite,
-    padding: scale(10),
+    paddingHorizontal: scale(10),
     borderRadius: scale(5),
     flexDirection: 'row',
     alignItems: 'center',
@@ -220,6 +220,7 @@ export const homeScreenStyles = StyleSheet.create({
     fontFamily: fonts.regularText.fontFamily,
   },
   menuContainer: {
+    flex: 1,
     paddingTop: scale(20),
   },
   homeMenuContainer: {

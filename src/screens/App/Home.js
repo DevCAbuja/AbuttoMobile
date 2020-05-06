@@ -8,7 +8,7 @@ import {
   FlatList,
   Image,
 } from 'react-native';
-import {homeScreenStyles, scale} from '../../assets/style';
+import {homeScreenStyles, scale, appStyles} from '../../assets/style';
 import MenuSvg from '../../assets/svgs/MenuSvg';
 import SearchSvg from '../../assets/svgs/SearchSvg';
 import Card from '../../components/Card';
@@ -66,6 +66,8 @@ export default function Home(props) {
       </TouchableWithoutFeedback>
       <View style={homeScreenStyles.menuContainer}>
         <FlatList
+          style={appStyles.container}
+          showsVerticalScrollIndicator={false}
           data={homeMenuItems}
           numColumns={2}
           renderItem={({item}) => (
